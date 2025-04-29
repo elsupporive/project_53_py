@@ -1,35 +1,17 @@
-from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
-class ContactApplication:
 
+class ContactHelper:
 
-    def __init__(self):
-        self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(30)
-
-    def open_home_page(self):
-        wd = self.wd
-        wd.get("http://macbook-pro-elvira.local/addressbook/index.php")
-
-
-    def login(self, username, password):
-        wd = self.wd
-        self.open_home_page()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
+    def __init__(self, app):
+        self.app = app
 
     def opens_contact_page(self):
-        wd = self.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
 
-    def create_contact(self, contact):
-        wd = self.wd
+    def create(self, contact):
+        wd = self.app.wd
         self.opens_contact_page()
         # fill new contact info
         wd.find_element_by_name("firstname").click()
@@ -100,12 +82,5 @@ class ContactApplication:
         self.return_to_home_page()
 
     def return_to_home_page(self):
-        wd = self.wd
+        wd = self.app.wd
         wd.find_element_by_link_text("home").click()
-
-    def logout(self):
-        wd = self.wd
-        wd.find_element_by_link_text("Logout").click()
-
-    def destroy(self):
-        self.wd.quit()
