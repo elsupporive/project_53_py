@@ -30,6 +30,7 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
+
     def delete_first_group(self):
         wd = self.app.wd
         self.opens_group_page()
