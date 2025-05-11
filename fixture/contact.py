@@ -66,7 +66,8 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if "Last name" not in wd.page_source and "First name" not in wd.page_source:
+            wd.find_element_by_link_text("home").click()
 
     def count(self):
         wd = self.app.wd
