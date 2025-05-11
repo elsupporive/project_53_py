@@ -55,6 +55,7 @@ class ContactHelper:
 
     def modify_first_contact(self, updated_contact):
         wd = self.app.wd
+        self.return_to_home_page()
         #open modification form
         wd.find_element_by_xpath("(//img[@title='Edit'])[1]").click()
         self.fill_contact_form(updated_contact)
@@ -66,5 +67,19 @@ class ContactHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.return_to_home_page()
+        return len(wd.find_elements_by_name("selected[]"))
+
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        self.return_to_home_page()
+
+
 
 
