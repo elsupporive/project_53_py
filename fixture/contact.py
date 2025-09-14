@@ -56,16 +56,19 @@ class ContactHelper:
             wd.find_element_by_name(field_name).send_keys(text)
 
     def modify_first_contact(self, updated_contact):
+        self.modify_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, updated_contact):
         wd = self.app.wd
         self.return_to_home_page()
-        #open modification form
-        wd.find_element_by_xpath("(//img[@title='Edit'])[1]").click()
+        # open modification form
+        row = wd.find_elements_by_css_selector("tr[name='entry']")[index]
+        row.find_element_by_css_selector("img[title='Edit']").click()
         self.fill_contact_form(updated_contact)
-        #submit modification
+        # submit modification
         wd.find_element_by_name("update").click()
         self.return_to_home_page()
         self.contact_cache = None
-
 
     def return_to_home_page(self):
         wd = self.app.wd
@@ -77,10 +80,12 @@ class ContactHelper:
         self.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         self.return_to_home_page()
         self.contact_cache = None
