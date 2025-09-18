@@ -1,5 +1,5 @@
 from sys import maxsize
-
+import re
 
 class Group:
     def __init__(self, name=None, header=None, footer=None, id=None):
@@ -9,10 +9,14 @@ class Group:
         self.id = id
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.name)
+        return "%s:%s:%s:%s" % (self.id, self.name, self.header, self.footer)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.name == other.name
+        return (self.id is None or other.id is None or self.id == other.id) and self.normalize_space(self.name) \
+               == self.normalize_space(other.name)
+
+    def normalize_space(self, s):
+        return re.sub(r"\s+", " ", s)
 
     def id_or_max(self):
         if self.id:
