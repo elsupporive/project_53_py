@@ -12,10 +12,10 @@ class Group:
         return "%s:%s:%s:%s" % (self.id, self.name, self.header, self.footer)
 
     def __eq__(self, other):
-        return (self.id is None or other.id is None or self.id == other.id) and self.normalize_space(self.name) \
-               == self.normalize_space(other.name)
+        return (self.id is None or other.id is None or self.id == other.id) and self.normaliz_space(self.name) \
+               == self.normaliz_space(other.name)
 
-    def normalize_space(self, s):
+    def normaliz_space(self, s):
         return re.sub(r"\s+", " ", s)
 
     def id_or_max(self):

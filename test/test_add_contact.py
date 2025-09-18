@@ -21,7 +21,7 @@ def random_email(maxlen):
 months = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
-testdata = [Contact(firstName="firstName3", lastName=random_string("lastName", 10),
+testdata = [Contact(firstName=random_string("firstName", 10), lastName=random_string("lastName", 10),
                     nickname=random_string("nickname", 10), company=random_string("company", 10),
                     address=random_string("nickname", 20),
                     phone_home=random_numbers(9), phone_mobile=random_numbers(9), phone_work=random_numbers(9), fax=random_numbers(9),
