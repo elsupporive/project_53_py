@@ -13,10 +13,13 @@ class Application:
     def __init__(self, browser, base_url):
         if browser == 'firefox':
             self.wd = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+            self.wd.implicitly_wait(2)
         elif browser == 'chrome':
             self.wd = webdriver.Chrome(ChromeDriverManager().install())
+            self.wd.implicitly_wait(2)
         elif browser == 'ie':
             self.wd = webdriver.Ie(IEDriverManager().install())
+            self.wd.implicitly_wait(2)
         else:
             raise ValueError("Unrecognized browser %s" % browser)
         # self.wd.implicitly_wait(5)

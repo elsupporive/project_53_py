@@ -1,3 +1,4 @@
+from time import sleep
 from model.group import Group
 
 class GroupHelper:
