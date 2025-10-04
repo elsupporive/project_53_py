@@ -1,6 +1,7 @@
 import re
 from random import randrange
 
+
 def test_phones_on_home_page(app):
     contacts = app.contact.get_contact_list()
     index = randrange(len(contacts))

@@ -1,7 +1,9 @@
 from model.contact import Contact
 from random import randrange
+import pytest
 
-def test_del_some_contact(app):
+@pytest.mark.parametrize("_", range(1))
+def test_del_some_contact(app, _):
     if app.contact.count() == 0:
         app.contact.create(Contact(nickname="Delete", company="Delete"))
     old_contacts = app.contact.get_contact_list()
