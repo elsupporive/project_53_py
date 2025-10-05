@@ -27,14 +27,23 @@ class DbFixture:
         list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname from addressbook where deprecated is NULL"
+            cursor.execute("select id, firstname, lastname, address, home, mobile, work, email, email2, email3"
+                           " from addressbook where deprecated is NULL"
                         )
             for row in cursor:
-                (id, firstname, lastname) = row
-                list.append(Contact(id=str(id), firstName=firstname, lastName=lastname))
+                (id, firstname, lastname, address, home, mobile, work, email, email2, email3) = row
+                list.append(Contact(id=str(id), firstName=firstname, lastName=lastname, address=address,
+                                    phone_home=home, phone_work=work, phone_mobile=mobile, email=email, email2=email2, email3=email3))
         finally:
             cursor.close()
         return list
+
+    def merged_phones_from_db(self, contact):
+        return "\n".join([contact.phone_home, contact.phone_mobile, contact.phone_work])
+
+    def merged_emails_from_db(self, contact):
+        return "\n".join([contact.email, contact.email2, contact.email3])
+
 
     def destroy(self):
         self.connection.close()

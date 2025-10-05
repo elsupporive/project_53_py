@@ -92,6 +92,7 @@ class ContactHelper:
         self.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
